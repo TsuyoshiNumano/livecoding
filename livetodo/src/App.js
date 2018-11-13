@@ -3,23 +3,32 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      value: '',
+      todo: []
+    };
+  }
+
+  handleChange = e => {
+    this.setState({ value: e.target.value });
+  };
+
+  handleClick = e => {
+    this.setState({ todo: [...this.state.todo, this.state.value] });
+  };
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <input onChange={this.handleChange} value={this.state.value} />
+        <button onClick={this.handleClick}>ボタン</button>
+        <div>
+          {this.state.todo.map(t => (
+            <div>{t}</div>
+          ))}
+        </div>
       </div>
     );
   }
