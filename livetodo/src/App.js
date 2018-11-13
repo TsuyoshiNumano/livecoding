@@ -11,22 +11,19 @@ class App extends Component {
     };
   }
 
-  componentDidMount() {
-    axios
-      .get(
-        'https://script.google.com/macros/s/AKfycbzj7ECyOKnlvFENaZvD7S4RDEKVKBfZAweUoEtyKYt-RhxS4lQm/exec'
-      )
-      .then(respose => {
-        this.setState({ todo: respose.data });
-      });
-  }
-
   handleChange = e => {
     this.setState({ value: e.target.value });
   };
 
   handleClick = e => {
-    this.setState({ todo: [...this.state.todo, this.state.value] });
+    axios
+      .get(
+        'https://script.google.com/macros/s/AKfycbzj7ECyOKnlvFENaZvD7S4RDEKVKBfZAweUoEtyKYt-RhxS4lQm/exec?todo=' +
+          this.state.value
+      )
+      .then(respose => {
+        this.setState({ todo: respose.data });
+      });
   };
 
   render() {
