@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 class App extends Component {
   constructor() {
@@ -9,6 +9,16 @@ class App extends Component {
       value: '',
       todo: []
     };
+  }
+
+  componentDidMount() {
+    axios
+      .get(
+        'https://script.google.com/macros/s/AKfycbzj7ECyOKnlvFENaZvD7S4RDEKVKBfZAweUoEtyKYt-RhxS4lQm/exec'
+      )
+      .then(respose => {
+        this.setState({ todo: respose.data });
+      });
   }
 
   handleChange = e => {
